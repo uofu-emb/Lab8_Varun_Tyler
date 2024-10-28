@@ -69,6 +69,6 @@ include(CTest)
 add_subdirectory(test)
 
 include(can2040)
-add_subdirectory(lib)
+add_subdirectory(lib/can2040.cmake)
 
 
