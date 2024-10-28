@@ -27,6 +27,12 @@ else()
     set(UNITY_PATH lib/unity)
 endif()
 
+if(DEFINED ENV{CAN_PATH})
+    set(CAN_PATH $ENV{CAN_PATH})
+else()
+    set(CAN_PATH lib/can2040)
+endif()
+
 # ====================================================================================
 cmake_minimum_required(VERSION 3.13)
 
@@ -67,8 +73,5 @@ add_subdirectory(src)
 # The test configuration is inside the test directory.
 include(CTest)
 add_subdirectory(test)
-
-include(can2040)
-add_subdirectory(lib/can2040/can2040.cmake)
 
 
