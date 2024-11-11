@@ -1,0 +1,150 @@
+{
+	"archive" : {},
+	"artifacts" : 
+	[
+		{
+			"path" : "libunity.a"
+		}
+	],
+	"backtrace" : 3,
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"add_library",
+			"include",
+			"add_compile_definitions",
+			"include_directories",
+			"target_include_directories"
+		],
+		"files" : 
+		[
+			"unity.cmake",
+			"CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 1
+			},
+			{
+				"command" : 1,
+				"file" : 1,
+				"line" : 57,
+				"parent" : 0
+			},
+			{
+				"file" : 0,
+				"parent" : 1
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 2,
+				"parent" : 2
+			},
+			{
+				"command" : 2,
+				"file" : 1,
+				"line" : 66,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 38,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 3,
+				"parent" : 2
+			},
+			{
+				"command" : 3,
+				"file" : 1,
+				"line" : 72,
+				"parent" : 0
+			}
+		]
+	},
+	"compileGroups" : 
+	[
+		{
+			"compileCommandFragments" : 
+			[
+				{
+					"fragment" : "-mcpu=cortex-m0plus -mthumb -Og -g -std=gnu11"
+				}
+			],
+			"defines" : 
+			[
+				{
+					"backtrace" : 4,
+					"define" : "PICO_ENTER_USB_BOOT_ON_EXIT=1"
+				},
+				{
+					"backtrace" : 4,
+					"define" : "configNUMBER_OF_CORES=1"
+				}
+			],
+			"includes" : 
+			[
+				{
+					"backtrace" : 5,
+					"path" : "/Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/lib/can2040/src"
+				},
+				{
+					"backtrace" : 6,
+					"path" : "/Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/lib/unity/src"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/include"
+				}
+			],
+			"language" : "C",
+			"languageStandard" : 
+			{
+				"backtraces" : 
+				[
+					3
+				],
+				"standard" : "11"
+			},
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"id" : "unity::@6890427a1f51a3e7e1df",
+	"name" : "unity",
+	"nameOnDisk" : "libunity.a",
+	"paths" : 
+	{
+		"build" : ".",
+		"source" : "."
+	},
+	"sourceGroups" : 
+	[
+		{
+			"name" : "Source Files",
+			"sourceIndexes" : 
+			[
+				0
+			]
+		}
+	],
+	"sources" : 
+	[
+		{
+			"backtrace" : 3,
+			"compileGroupIndex" : 0,
+			"path" : "lib/unity/src/unity.c",
+			"sourceGroupIndex" : 0
+		}
+	],
+	"type" : "STATIC_LIBRARY"
+}

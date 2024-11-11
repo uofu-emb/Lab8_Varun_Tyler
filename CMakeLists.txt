@@ -32,6 +32,10 @@ if(DEFINED ENV{CAN_PATH})
 else()
     set(CAN_PATH lib/can2040)
 endif()
+message("CAN2040 path: ${CAN_PATH}")
+
+include(${CAN_PATH}/can2040.cmake)
+include_directories(${CAN_PATH}/src)
 
 # ====================================================================================
 cmake_minimum_required(VERSION 3.13)
