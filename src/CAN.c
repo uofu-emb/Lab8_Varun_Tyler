@@ -35,5 +35,5 @@ void canbus_setup(void)
 }
 
 void main(){
-
+    sleep_ms(10);
 }
