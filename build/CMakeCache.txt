@@ -361,7 +361,7 @@ PICO_STDIO_UART:BOOL=ON
 PICO_STDIO_USB:BOOL=OFF
 
 //No help, variable specified on the command line.
-Python3_EXECUTABLE:UNINITIALIZED=/usr/bin/python3
+Python3_EXECUTABLE:STRING=/usr/bin/python3
 
 //Path to a program.
 RENODE:FILEPATH=RENODE-NOTFOUND
