@@ -35,9 +35,6 @@ else()
 endif()
 message("CAN2040 path: ${CAN_PATH}")
 
-# include(${CAN_PATH}/can2040.cmake)
-# include_directories(${CAN_PATH}/src)
-
 # ====================================================================================
 cmake_minimum_required(VERSION 3.13)
 
@@ -58,8 +55,7 @@ include(${FREERTOS_PATH}/portable/ThirdParty/GCC/RP2040/FreeRTOS_Kernel_import.c
 include(unity.cmake)
 
 #CAN Path
-include(can2040.cmake)
-# include(${CAN_PATH}/can2040.cmake)
+include(${CAN_PATH}/can2040.cmake)
 
 # This defines your project name, you can name it anything you want.
 project(myproject C CXX ASM)
