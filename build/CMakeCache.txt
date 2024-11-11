@@ -52,8 +52,8 @@ CMAKE_ASM_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 //No help, variable specified on the command line.
 CMAKE_BUILD_TYPE:STRING=Debug
 
-//No help, variable specified on the command line.
-CMAKE_CXX_COMPILER:FILEPATH=/Users/u1530331/.pico-sdk/toolchain/13_2_Rel1/bin/arm-none-eabi-gcc
+//CXX compiler
+CMAKE_CXX_COMPILER:STRING=/Users/u1530331/.pico-sdk/toolchain/13_2_Rel1/bin/arm-none-eabi-gcc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -78,8 +78,8 @@ CMAKE_CXX_FLAGS_RELEASE:STRING=-g -O3 -DNDEBUG
 //Flags used by the CXX compiler during RELWITHDEBINFO builds.
 CMAKE_CXX_FLAGS_RELWITHDEBINFO:STRING=-O2 -g -DNDEBUG
 
-//No help, variable specified on the command line.
-CMAKE_C_COMPILER:FILEPATH=/Users/u1530331/.pico-sdk/toolchain/13_2_Rel1/bin/arm-none-eabi-gcc
+//C compiler
+CMAKE_C_COMPILER:STRING=/Users/u1530331/.pico-sdk/toolchain/13_2_Rel1/bin/arm-none-eabi-gcc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
@@ -232,7 +232,7 @@ CMAKE_STRIP:FILEPATH=/Users/u1530331/.pico-sdk/toolchain/13_2_Rel1/bin/arm-none-
 //Path to a program.
 CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
 
-//No help, variable specified on the command line.
+//The CMake toolchain file
 CMAKE_TOOLCHAIN_FILE:FILEPATH=/Users/u1530331/.pico-sdk/sdk/2.0.0/cmake/preload/toolchains/pico_arm_cortex_m0plus_gcc.cmake
 
 //If this value is on, makefiles will be generated without the
@@ -361,16 +361,13 @@ PICO_STDIO_UART:BOOL=ON
 PICO_STDIO_USB:BOOL=OFF
 
 //No help, variable specified on the command line.
-Python3_EXECUTABLE:STRING=/usr/bin/python3
+Python3_EXECUTABLE:UNINITIALIZED=/usr/bin/python3
 
 //Path to a program.
 RENODE:FILEPATH=RENODE-NOTFOUND
 
 //Name of the computer/site where compile is being run
 SITE:STRING=MLIB-KC-STU-LAP-FVFD37A2P3XY
-
-//Dependencies for the target
-can2040_LIB_DEPENDS:STATIC=general;cmsis_core;general;hardware_structs;general;pico_stdlib;
 
 //Value Computed by CMake
 myproject_BINARY_DIR:STATIC=/Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/build

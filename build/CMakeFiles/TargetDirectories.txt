@@ -1,5 +1,5 @@
-/Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/build/CMakeFiles/can2040.dir
 /Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/build/CMakeFiles/unity.dir
+/Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/build/CMakeFiles/can2040.dir
 /Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/build/CMakeFiles/Experimental.dir
 /Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/build/CMakeFiles/Nightly.dir
 /Users/u1530331/Documents/Adv.Embedded Lab/Lab8/Lab8_Varun_Tyler/build/CMakeFiles/Continuous.dir
