@@ -2,12 +2,19 @@
 #include <hardware/regs/intctrl.h>
 #include <stdio.h>
 #include <pico/stdlib.h>
+#include <FreeRTOS.h>
+#include <task.h>
+#include <queue.h>
+
 
 static struct can2040 cbus;
+QueueHandle_t msgs;
 
 
 static void can2040_cb(struct can2040 *cd, uint32_t notify, struct can2040_msg *msg)
 {
+    printf("Message Received");
+    xQueueSendToBack(msgs, msg, portMAX_DELAY);
     // Handle received CAN messages here
     //printf("Received message with ID: %X\n", msg->id);
 }
@@ -36,7 +43,7 @@ void canbus_setup(void)
     can2040_start(&cbus, sys_clock, bitrate, gpio_rx, gpio_tx);
 }
 
-void send_periodic_message(void)
+void transmit(__unused void *params)
 {
     struct can2040_msg tx_msg = {
         .id = 0x01,   
@@ -46,17 +53,33 @@ void send_periodic_message(void)
 
     // Infinite loop to send message every second
     while (1) {
-        can2040_transmit(&cbus, &tx_msg);
-        printf("Sent message with ID: %X\n", tx_msg.id);
+        if(can2040_transmit(&cbus, &tx_msg)){
+            printf("Sent message with ID: %X\n", tx_msg.id);
+        }
+        else{
+            printf("FATAL ERROR : Transmission Failed");
+        }
         sleep_ms(1000);
     }
+}
+
+void receive(__unused void *params){
+    struct can2040_msg data;
+    xQueueReceive(msgs, &data, portMAX_DELAY);
+    printf("Got message in receive function \n");
 }
 
 int main(void)
 {
     stdio_init_all();
+    msgs = xQueueCreate(100, sizeof(struct can2040_msg));
     canbus_setup();
-    send_periodic_message();
+    TaskHandle_t task;
+    // xTaskCreate(transmit, "MainThread",
+    //             configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1UL, &task);
+    xTaskCreate(receive, "MainThread",
+                configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1UL, &task);
+    vTaskStartScheduler();
 
     return 0;
 }

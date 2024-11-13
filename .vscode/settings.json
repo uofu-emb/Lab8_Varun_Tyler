@@ -39,6 +39,7 @@
     "raspberry-pi-pico.python3Path": "${HOME}/.pico-sdk/python/3.12.1/python.exe",
     "files.associations": {
         "can2040.h": "c",
-        "freertos.h": "c"
+        "freertos.h": "c",
+        "task.h": "c"
     }
 }
