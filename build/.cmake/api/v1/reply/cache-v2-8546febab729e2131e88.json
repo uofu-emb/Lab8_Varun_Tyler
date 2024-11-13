@@ -311,10 +311,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "CXX compiler"
+					"value" : "No help, variable specified on the command line."
 				}
 			],
-			"type" : "STRING",
+			"type" : "FILEPATH",
 			"value" : "/Users/u1530331/.pico-sdk/toolchain/13_2_Rel1/bin/arm-none-eabi-gcc"
 		},
 		{
@@ -439,10 +439,10 @@
 				},
 				{
 					"name" : "HELPSTRING",
-					"value" : "C compiler"
+					"value" : "No help, variable specified on the command line."
 				}
 			],
-			"type" : "STRING",
+			"type" : "FILEPATH",
 			"value" : "/Users/u1530331/.pico-sdk/toolchain/13_2_Rel1/bin/arm-none-eabi-gcc"
 		},
 		{
@@ -1279,7 +1279,7 @@
 			[
 				{
 					"name" : "HELPSTRING",
-					"value" : "The CMake toolchain file"
+					"value" : "No help, variable specified on the command line."
 				}
 			],
 			"type" : "FILEPATH",
