@@ -64,7 +64,7 @@ void transmit_task(void* params){
    uint32_t count = 0;
    struct can2040_msg msg;
    msg.id = 0;
-   msg.dlc = 2;
+   msg.dlc = 8;
    int status = 0;
    while(1)
    {
