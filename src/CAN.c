@@ -12,8 +12,8 @@
 #define RECEIVE 0
 // Macros for activity 1
 #define TRANSMIT_RECEIVE 1
-#define HIGHER_PRIORITY_BOARD 1
-#define LOWER_PRIORITY_BOARD 0
+#define HIGHER_PRIORITY_BOARD 0
+#define LOWER_PRIORITY_BOARD 1
 #define TICKS 2000
 #define BUSY_WAIT_DELAY 1
 
@@ -22,6 +22,7 @@ static QueueHandle_t msg_received;
  
 static void can2040_cb(struct can2040 *cd, uint32_t notify, struct can2040_msg *msg)
 {
+    //For activity 0, tranmit board doesn't need any callback function to it.
     if (RECEIVE || TRANSMIT_RECEIVE){
         xQueueSend(msg_received, &(msg->data32[1]), portMAX_DELAY);
     }
@@ -78,6 +79,7 @@ void transmit_task(void* params){
         if(LOWER_PRIORITY_BOARD && BUSY_WAIT_DELAY){
             vTaskDelay(pdMS_TO_TICKS(TICKS));
         }
+        //Assigning 0 to avoid any garbage value
         msg.data32[0] = 0;
         //Sending some random value
         if(LOWER_PRIORITY_BOARD){
@@ -112,6 +114,7 @@ void activity_0(){
 }
 
 void activity_1(){
+    //Use macros to select boards based on priority level
     if(HIGHER_PRIORITY_BOARD){
         xTaskCreate(transmit_task, "Higher prior", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 5UL, NULL);
     }
