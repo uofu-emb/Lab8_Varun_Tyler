@@ -1,8 +1,6 @@
 # This is the main binary. List your C files here.
 add_executable(realtime
     CAN.c
-    #CAN_RX.c
-    #ashton_code.c
 )
 
 pico_set_program_name(realtime "test")
