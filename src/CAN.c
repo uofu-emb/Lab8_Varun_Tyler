@@ -9,14 +9,20 @@
 
 // Macros for activity 0
 #define TRANSMIT 0
-#define RECEIVE 1
+#define RECEIVE 0
+// Macros for activity 1
+#define TRANSMIT_RECEIVE 1
+#define HIGHER_PRIORITY_BOARD 1
+#define LOWER_PRIORITY_BOARD 0
+#define TICKS 2000
+#define BUSY_WAIT_DELAY 1
 
 static struct can2040 cbus;
 static QueueHandle_t msg_received;
  
 static void can2040_cb(struct can2040 *cd, uint32_t notify, struct can2040_msg *msg)
 {
-    if (RECEIVE){
+    if (RECEIVE || TRANSMIT_RECEIVE){
         xQueueSend(msg_received, &(msg->data32[1]), portMAX_DELAY);
     }
 }
@@ -55,32 +61,40 @@ void receive_task(void* params){
    uint8_t data = 0;
    while(xQueueReceive(msg_received, &data, portMAX_DELAY))
    {
-       printf("Data Received: %u\n", data);
+       printf("Data Received: %u \n", data);
    }
 }
 
 
-void transmit_task(void* params){  
+void transmit_task(void* params){
    uint32_t count = 0;
    struct can2040_msg msg;
    msg.id = 0;
-   msg.dlc = 8;
+   msg.dlc = 8; //spec of the size over the bus
    int status = 0;
    while(1)
-   {
+    {
         vTaskDelay(pdMS_TO_TICKS(1000));
-        //We will use this value for activity 1
+        if(LOWER_PRIORITY_BOARD && BUSY_WAIT_DELAY){
+            vTaskDelay(pdMS_TO_TICKS(TICKS));
+        }
         msg.data32[0] = 0;
         //Sending some random value
-        msg.data32[1] = 5;
-        if(can2040_transmit(&cbus, &msg) != 0){
-        printf("TRANSMISSION FAILED");
+        if(LOWER_PRIORITY_BOARD){
+            msg.data32[1] = 2;
         }
         else{
-        printf("Transmit: %u\n", msg.data32[1]);
+            msg.data32[1] = 5;
         }
-   }
+        if(can2040_transmit(&cbus, &msg) != 0){
+            printf("TRANSMISSION FAILED");
+        }
+        else{
+            printf("Transmit: %u\n", msg.data32[1]);
+        }
+    }
 }
+
 
 
 void activity_0(){
@@ -97,14 +111,32 @@ void activity_0(){
     vTaskStartScheduler();
 }
 
+void activity_1(){
+    if(HIGHER_PRIORITY_BOARD){
+        xTaskCreate(transmit_task, "Higher prior", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 5UL, NULL);
+    }
+    
+    if(LOWER_PRIORITY_BOARD){
+        xTaskCreate(transmit_task, "Lower prior", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1UL, NULL);
+    }
 
+    xTaskCreate(receive_task, "Receive Task", configMINIMAL_STACK_SIZE, NULL, tskIDLE_PRIORITY + 1UL, NULL);
+
+    vTaskStartScheduler();
+    
+}
 
 
 void main(){
     stdio_init_all();
     canbus_setup();
-    if (RECEIVE){
-    msg_received = xQueueCreate(20, sizeof(uint32_t));
+    if (RECEIVE || TRANSMIT_RECEIVE){
+        msg_received = xQueueCreate(20, sizeof(uint32_t));
     }
-    activity_0();
+    if(!TRANSMIT_RECEIVE){
+        activity_0();
+    }
+    if(TRANSMIT_RECEIVE){
+        activity_1();
+    }
 }
